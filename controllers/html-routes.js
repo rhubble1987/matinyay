@@ -27,13 +27,13 @@ module.exports = function (app) {
                 chats: data
             };
             console.log(data);
-            res.render("viewParty", hbsObject);
+            res.render("viewParty", {layout: "viewPartyMain"}, hbsObject);
         }).catch(function (err) {
             const hbsObject = {
                 chats: []
             };
             console.log(data);
-            res.render("viewParty", hbsObject);
+            res.render("viewParty", hbsObject, {layout: "viewPartyMain"});
         });
     });
 
