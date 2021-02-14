@@ -1,0 +1,118 @@
+<div class="columns">
+    <div class="column">
+        <div id="movie-info">
+        </div>
+    </div>
+    <div class="column">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Watch Party</th>
+                    <th>Date and Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each parties}}
+                    <tr>
+                        <td>
+                            <a href="/view/{{this.dataValues.id}}">{{this.dataValues.roomName}}</a>
+                        </td>
+                        <td>
+                           <p>{{this.dataValues.viewDay}} at {{this.dataValues.viewTime}}</p> 
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+    </div>
+</div>
+</div>
+    <div class="columns">
+
+        <div class="column">
+            <h2>Create a new watch party discussion</h2>
+                <div class="field">
+                    <label class="label">Movie Event Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="roomName" id="roomName">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Viewing Day</label>
+                    <div class="control">
+                        <input class="input" type="date" name="viewDay" id="viewDay">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Viewing Time</label>
+                    <div class="control">
+                        <input class="input" type="time" name="viewTime" id="viewTime">
+                    </div>
+                </div>
+                <div class="control">
+                    <button id="partyCreate" class="button is-link partyCreate">Create Viewing Party</button>
+                </div>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    let urlArray = window.location.pathname.split("/");
+    let omdbId = urlArray[urlArray.length - 1];
+
+    let key = "8e4b0c73";
+    $.ajax({
+        method: "GET",
+        url: "https://www.omdbapi.com/?i=" + omdbId + "&plot=short&r=json&" + "apikey=" + key,
+        success: function (response) {
+            console.log(response);
+            $("#movie-info").append(`
+            <a href="/movie/${response.imdbID}"><h2>${response.Title}</h2></a>
+            <img src=${response.Poster}></img>
+            <p>${response.Plot}</p>
+            `);
+        }
+    });
+
+
+
+
+    $(document).ready(function () {
+        $("#partyCreate").on("click", function (event) {
+            console.log("clicked the create viewing party button");
+            $.ajax({
+                url: "/api/parties",
+                type: "POST",
+                data: {
+                    OMDBId: omdbId,
+                    roomName: $("#roomName").val().trim(),
+                    viewDay: moment($("#viewDay").val()).format("M/D/YYYY"),
+                    viewTime: moment($("#viewTime").val(),"HH:mm").format("h:mm A"),
+                },
+                success: () => {
+                    location.reload();
+                }
+            })
+        });
+
+        $(document).on("keydown", function (event) {
+            if (event.keyCode === 13) {
+                console.log("pressed enter");
+                $.ajax({
+                    url: "/api/parties",
+                    type: "POST",
+                    data: {
+                        OMDBId: omdbId,
+                        roomName: $("#roomName").val().trim(),
+                        viewDay: moment($("#viewDay").val()).format("M/D/YYYY"),
+                        viewTime: moment($("#viewTime").val(),"HH:mm").format("h:mm A"),
+                    },
+                    success: () => {
+                        location.reload();
+                    }
+                });
+            }
+        });
+    });
+</script>
