@@ -7,6 +7,10 @@ module.exports = function(sequelize,DataTypes){
         body: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        messageId: {
+            type: DataTypes.STRING,
+            annowNull: false
         }
     });
     

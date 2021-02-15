@@ -2,7 +2,7 @@
 
 module.exports =function(sequelize, DataTypes){
     const ViewParty = sequelize.define("ViewParty",{
-        OMDBId:{
+        imdbId:{
             type: DataTypes.STRING,
             allowNull:false
         },

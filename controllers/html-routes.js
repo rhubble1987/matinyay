@@ -7,7 +7,7 @@ module.exports = function (app) {
 
     });
     app.get("/movie/:movieId", function (req, res) {
-        db.ViewParty.findAll({ where: { OMDBId: req.params.movieId } }).then(function (data) {
+        db.ViewParty.findAll({ where: { imdbId: req.params.movieId } }).then(function (data) {
             const hbsObject = {
                 parties: data
             };
@@ -27,13 +27,13 @@ module.exports = function (app) {
                 chats: data
             };
             console.log(data);
-            res.render("viewParty", {layout: "viewPartyMain"}, hbsObject);
+            res.render("viewParty", hbsObject);
         }).catch(function (err) {
             const hbsObject = {
                 chats: []
             };
             console.log(data);
-            res.render("viewParty", hbsObject, {layout: "viewPartyMain"});
+            res.render("viewParty", hbsObject);
         });
     });
 

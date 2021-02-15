@@ -59,18 +59,18 @@
 
 <script type="text/javascript">
     let urlArray = window.location.pathname.split("/");
-    let omdbId = urlArray[urlArray.length - 1];
+    let imdbId = urlArray[urlArray.length - 1];
 
-    let key = "8e4b0c73";
+    let key = "k_8pgddpof";
     $.ajax({
         method: "GET",
-        url: "https://www.omdbapi.com/?i=" + omdbId + "&plot=short&r=json&" + "apikey=" + key,
+        url: "https://imdb-api.com/en/API/Title/" + key + "/" + imdbId + "/Posters",
         success: function (response) {
             console.log(response);
             $("#movie-info").append(`
-            <a href="/movie/${response.imdbID}"><h2>${response.Title}</h2></a>
-            <img src=${response.Poster}></img>
-            <p>${response.Plot}</p>
+            <a href="/movie/${response.id}"><h2>${response.fullTitle}</h2></a>
+            <img src=${response.image}></img>
+            <p>${response.plot}</p>
             `);
         }
     });
@@ -85,7 +85,7 @@
                 url: "/api/parties",
                 type: "POST",
                 data: {
-                    OMDBId: omdbId,
+                    imdbId: imdbId,
                     roomName: $("#roomName").val().trim(),
                     viewDay: moment($("#viewDay").val()).format("M/D/YYYY"),
                     viewTime: moment($("#viewTime").val(),"HH:mm").format("h:mm A"),
@@ -103,7 +103,7 @@
                     url: "/api/parties",
                     type: "POST",
                     data: {
-                        OMDBId: omdbId,
+                        imdbId: imdbId,
                         roomName: $("#roomName").val().trim(),
                         viewDay: moment($("#viewDay").val()).format("M/D/YYYY"),
                         viewTime: moment($("#viewTime").val(),"HH:mm").format("h:mm A"),

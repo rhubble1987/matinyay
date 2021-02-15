@@ -7,7 +7,7 @@ module.exports = function (app) {
         console.log(req.body.viewDay);
         console.log(req.body.viewTime);
         db.ViewParty.create({
-            OMDBId: req.body.OMDBId,
+            imdbId: req.body.imdbId,
             roomName: req.body.roomName,
             viewerNumber: 0,
             viewDay: req.body.viewDay,
@@ -45,6 +45,7 @@ module.exports = function (app) {
         db.Chat.create({
             author: null,
             body: req.body.message,
+            messageId: req.body.messageId,
             ViewPartyId: req.body.viewId
         }).then(function (dbChat) {
             res.json(dbChat);
