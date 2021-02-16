@@ -67,10 +67,6 @@ socket.on('chat message', function (msg) {
     messages.appendChild(br);
     messages.appendChild(br);
     window.scrollTo(0, document.body.scrollHeight);
-    /* if (msg.movieTicketNumber !== movieTicketNumber) {
-        $('#message').append(`<p data-movieTicketNumber="${msg.movieTicketNumber}" class="is-pulled-left">${msg.msg}</p><br><br>`);
-        window.scrollTo(0, document.body.scrollHeight);
-    } */
 });
 
 //Positions user's previous messages to the right
