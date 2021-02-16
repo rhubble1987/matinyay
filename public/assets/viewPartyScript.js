@@ -6,12 +6,13 @@ var viewId = urlArray[urlArray.length-1];
 var movieTicketNumber = localStorage.getItem('movieTicketNumber');
 
 
+//Connects the view party to the specific websocket channel
+    var socket = io({
+        query: {
+            room: viewId
+        }
+    });
 
-var socket = io({
-    query: {
-        room: viewId
-    }
-});
 
 //Creates new ticket number
 function createMovieTicket() {
@@ -58,13 +59,21 @@ form.addEventListener('submit', function (e) {
 
 //Appends other users' chats
 socket.on('chat message', function (msg) {
-    if (msg.movieTicketNumber !== movieTicketNumber) {
-        $('#message').append(`<p class="is-pulled-left">${msg.msg}</p><br><br>`);
+    console.log(msg);
+    var item = document.createElement('p');
+    var br = document.createElement('br');
+    item.textContent = msg.msg;
+    messages.appendChild(item);
+    messages.appendChild(br);
+    messages.appendChild(br);
+    window.scrollTo(0, document.body.scrollHeight);
+    /* if (msg.movieTicketNumber !== movieTicketNumber) {
+        $('#message').append(`<p data-movieTicketNumber="${msg.movieTicketNumber}" class="is-pulled-left">${msg.msg}</p><br><br>`);
         window.scrollTo(0, document.body.scrollHeight);
-    }
+    } */
 });
 
-//Positions user's texts to the right
+//Positions user's previous messages to the right
 $('.is-pulled-left').each(function() {
     if ($(this).attr('data-movieTicketNumber') == movieTicketNumber) {
         $(this).removeClass('is-pulled-left').addClass('is-pulled-right');

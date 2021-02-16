@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   });
   socket.on('chat message', msg => {
     console.log(msg);
-    io.to(room).emit('chat message', msg);
+    socket.to(room).emit('chat message', msg);
   });
 
   socket.join(room);
