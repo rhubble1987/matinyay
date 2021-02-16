@@ -14,19 +14,21 @@
             <a class="navbar-item" href="/">Matinyay!</a>
         </div>
     </nav>
-<div class="container is-justify-content-center">
-    <div class="container" id="messages">
-    <p data-messageid="12345" class="is-pulled-right">This is a message from me!</p>
+<div class="container" id="messages">
+    <div data-messageid="12345" class="box p-2 m-1 has-text-white has-background-primary-dark is-pulled-right">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into </div>
     <br>
     <br>
-    <p data-messageid="678910" class="is-pulled-left">This is a message from a friend!</p>
+    <div data-messageid="12345" class="box p-2 m-1 has-text-white has-background-primary-dark is-pulled-right">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into </div>
     <br>
     <br>
-    </div>
+    <div data-messageid="678910" class="box p-2 m-1 has-text-white has-background-link-dark is-pulled-left">This is a message from a friend!</div>
+    <br>
+    <br>
+</div>
     <form id="form" action="">
     <input class="input" id="input" placeholder="Write something!" autocomplete="off" /><button class="button is-primary is-outlined">Send</button>
 </form>
-</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
 <script src="/socket.io/socket.io.js"></script>

@@ -33,7 +33,7 @@ if (!movieTicketNumber) {
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (input.value) {
-        $('#messages').append(`<p class="is-pulled-right">${input.value}</p><br><br>`);
+        $('#messages').append(`<div class="box p-2 m-1 has-text-white has-background-primary-dark is-pulled-right">${input.value}</div><br><br>`);
         var chat = {
             msg: input.value,
             movieTicketNumber: movieTicketNumber
@@ -72,7 +72,7 @@ socket.on('chat message', function (msg) {
 //Positions user's previous messages to the right
 $('.is-pulled-left').each(function() {
     if ($(this).attr('data-movieTicketNumber') == movieTicketNumber) {
-        $(this).removeClass('is-pulled-left').addClass('is-pulled-right');
+        $(this).removeClass('box p-2 has-text-white has-background-link-dark is-pulled-left').addClass('box p-2 m-1 has-text-white has-background-primary-dark is-pulled-right');
     }
 });
     

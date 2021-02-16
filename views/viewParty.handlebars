@@ -1,7 +1,7 @@
 <div class="container is-justify-content-center">
     <div class="container" id="messages">
         {{#each chats}}
-            <p class="is-pulled-left" data-movieTicketNumber="{{this.dataValues.movieTicketNumber}}">{{this.dataValues.body}}</p>
+            <div class="box p-2 m-1 has-text-white has-background-link-dark is-pulled-left" data-movieTicketNumber="{{this.dataValues.movieTicketNumber}}">{{this.dataValues.body}}</div>
             <br>
             <br>
         {{/each}}
