@@ -60,12 +60,14 @@ form.addEventListener('submit', function (e) {
 //Appends other users' chats
 socket.on('chat message', function (msg) {
     console.log(msg);
-    var item = document.createElement('p');
+    var item = document.createElement('div');
     var br = document.createElement('br');
+    var secondBr = document.createElement('br');
     item.textContent = msg.msg;
     messages.appendChild(item);
     messages.appendChild(br);
-    messages.appendChild(br);
+    messages.appendChild(secondBr);
+    item.setAttribute('class','box p-2 m-1 has-text-white has-background-link-dark is-pulled-left');
     window.scrollTo(0, document.body.scrollHeight);
 });
 
