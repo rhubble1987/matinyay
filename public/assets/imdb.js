@@ -12,7 +12,7 @@ for (let i = 0; i < imdbIds.length; i++) {
             console.log(response);
             $("#movie-list").append(`
             <div class="column is-3">
-            <div class="box">
+            <div class="box mt-5">
             <p><a href="/movie/${response.id}">${response.fullTitle}</a></p>
             <figure class="image">
             <img src="${response.image}">
