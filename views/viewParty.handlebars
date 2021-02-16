@@ -1,6 +1,10 @@
 <div class="container is-justify-content-center">
     <div class="container" id="messages">
-    
+        {{#each chats}}
+            <p class="is-pulled-left" data-movieTicketNumber="{{this.dataValues.movieTicketNumber}}">{{this.dataValues.body}}</p>
+            <br>
+            <br>
+        {{/each}}
     </div>
     <form id="form" action="">
     <input class="input" id="input" placeholder="Write something!" autocomplete="off" /><button class="button is-primary is-outlined">Send</button>

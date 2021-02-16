@@ -45,7 +45,7 @@ module.exports = function (app) {
         db.Chat.create({
             author: null,
             body: req.body.message,
-            messageId: req.body.messageId,
+            movieTicketNumber: req.body.movieTicketNumber,
             ViewPartyId: req.body.viewId
         }).then(function (dbChat) {
             res.json(dbChat);

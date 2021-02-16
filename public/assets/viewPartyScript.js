@@ -1,8 +1,11 @@
 var form = document.getElementById('form');
 var input = document.getElementById('input');
 
-let urlArray = window.location.pathname.split("/");
-let viewId = urlArray[urlArray.length-1];
+var urlArray = window.location.pathname.split("/");
+var viewId = urlArray[urlArray.length-1];
+var movieTicketNumber = localStorage.getItem('movieTicketNumber');
+
+
 
 var socket = io({
     query: {
@@ -10,26 +13,29 @@ var socket = io({
     }
 });
 
+//Creates new ticket number
 function createMovieTicket() {
-    var movieTicketNumber = Math.floor(Math.random() * (10000 - 1000) + 1000).toString();
-    //Create modal that displays a welcome message along with user's ticket number
-    //Add ticket number from the modal into the chat message being emitted and broadcasted
-    //Store ticket number in local storage
-    //Pull ticket number on page refresh
-    //Ticket number determines placement of the message (left or right on the screen)
+    movieTicketNumber = moment().format('YYYYMMDDHHmmss') + Math.floor(Math.random() * (10000 - 1000) + 1000).toString();
+    var movieTicket = `<p id="movie-ticket-number" style="display: none">${movieTicketNumber}</p>`;
+    $('body').append(movieTicket);
+    localStorage.setItem('movieTicketNumber', movieTicketNumber);
+    localStorage.setItem('movieTicket', movieTicket);  
+}
+
+//Checks to see if an existing movie ticket number exists and if not, it calls the function to create a new ticket number
+if (!movieTicketNumber) {
+    createMovieTicket();
 }
 
 
+//Emits the chat message to the websocket and also saves the message to the database
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var messageId = moment().format('YYYYMMDDHHmmss') + Math.floor(Math.random() * (10000 - 1000) + 1000).toString();
-    console.log(messageId)
-    myMessages.push(messageId);
     if (input.value) {
-        $('#messages').append(`<p data-message-id="${messageId}" class="is-pulled-right">${input.value}</p><br><br>`);
+        $('#messages').append(`<p class="is-pulled-right">${input.value}</p><br><br>`);
         var chat = {
             msg: input.value,
-            messageId: messageId
+            movieTicketNumber: movieTicketNumber
         };
         socket.emit('chat message', chat);
 
@@ -39,7 +45,7 @@ form.addEventListener('submit', function (e) {
             data: {
                 message: input.value,
                 viewId: viewId,
-                messageId: messageId
+                movieTicketNumber: movieTicketNumber
             }
         });
 
@@ -50,16 +56,21 @@ form.addEventListener('submit', function (e) {
 });
 
 
+//Appends other users' chats
 socket.on('chat message', function (msg) {
-    for (i = 0; i < myMessages.length; i++) {
-        if (msg.messageId === myMessages[i]) {
-            i = messageIds.length;
-        } else if (i === messageIds.length && msg.messageId !== messageIds[i]) {
-            $('#message').append(`<p data-messageid="${msg.messageId}" class="is-pulled-left">${msg.msg}</p><br><br>`);
-            window.scrollTo(0, document.body.scrollHeight);
-        }
+    if (msg.movieTicketNumber !== movieTicketNumber) {
+        $('#message').append(`<p class="is-pulled-left">${msg.msg}</p><br><br>`);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 });
+
+//Positions user's texts to the right
+$('.is-pulled-left').each(function() {
+    if ($(this).attr('data-movieTicketNumber') == movieTicketNumber) {
+        $(this).removeClass('is-pulled-left').addClass('is-pulled-right');
+    }
+});
+    
 
 
 
