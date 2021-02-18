@@ -2,15 +2,51 @@
 <div class="columns is-justify-content-center">
     <div class="column is-8">
         <div class="container">
-        <div class="columns is-flex-wrap-wrap" id="movie-list">
-             
+        <div class="columns is-flex-wrap-wrap" id="movie-list">    
         </div>
         </div>
 
     </div>
 
 </div>
-
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <!-- Any other Bulma elements you want -->
+    <div class="field">
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <input id="movie-search-field" class="input" type="text" placeholder="Search for a movie">
+            </p>
+            <p class="control">
+                <a id="find-movie" class="button is-info">Search</a>
+            </p>
+        </div>
+        <ul id="movie-results">
+        </ul>
+                <label class="label">Movie Event Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="roomName" id="roomName">
+                </div>
+                </div>
+                <div class="field">
+                    <label class="label">Viewing Day</label>
+                    <div class="control">
+                        <input class="input" type="date" name="viewDay" id="viewDay">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Viewing Time</label>
+                    <div class="control">
+                        <input class="input" type="time" name="viewTime" id="viewTime">
+                    </div>
+                </div>
+                <div class="control">
+                    <button id="partyCreate" class="button is-link partyCreate">Create Viewing Party</button>
+                </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/imdb.js" type="text/javascript"></script>
 
