@@ -1,8 +1,11 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+var compression = require('compression');
 
 // Sets up the Express App
 const app = express();
+
+app.use(compression());
 
 //Allows io conenction
 const http = require('http').Server(app);
