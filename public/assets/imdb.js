@@ -21,12 +21,14 @@ $('.modal-background').click(function() {
 
 searchForMovieButton.click(function(event) {
     event.preventDefault();
+    searchForMovieButton.attr('class','button is-info is-loading');
     $('#movie-results').empty();
     $.ajax({
         method:"GET",
         url: "https://imdb-api.com/en/API/SearchMovie/" + key + "/" + $('#movie-search-field').val()
     }).then(function (response) {
             console.log(response);
+            searchForMovieButton.attr('class','button is-info');
             $('#movie-results').append('<p><b>Results</b></p>');
             for (i = 0; i < 5; i++) {
                 console.log(response.results[i]); 
@@ -101,7 +103,7 @@ $(document).ready(function() {
                         <div class="box mt-5">
                         <p><a href="/movie/${data.id}">${data.fullTitle}</a></p>
                         <figure class="image">
-                        <img src="${data.image} width="200" height="300">
+                        <img src="${data.image} style="width: 200px; height: 300px;>
                         </figure>
                         </div>
                         </div>`);
