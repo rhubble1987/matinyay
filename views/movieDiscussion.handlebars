@@ -69,7 +69,7 @@
             console.log(response);
             $("#movie-info").append(`
             <a href="/movie/${response.id}"><h2>${response.fullTitle}</h2></a>
-            <img src=${response.image}></img>
+            <img src=${response.image} height="300" width="200">
             <p>${response.plot}</p>
             `);
         }

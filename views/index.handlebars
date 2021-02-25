@@ -2,10 +2,12 @@
 <div class="columns is-justify-content-center">
     <div class="column is-8">
         <div class="container">
-        <div class="columns is-flex-wrap-wrap" id="movie-list">    
-        </div>
-        </div>
+        <div class="columns is-flex-wrap-wrap" id="movie-list"> 
 
+        </div>
+        <button id="add-a-new-movie" class="button">Add a new movie and watch party!</button>
+        </div>
+        
     </div>
 
 </div>
@@ -13,6 +15,7 @@
   <div class="modal-background"></div>
   <div class="modal-content">
     <!-- Any other Bulma elements you want -->
+    <div class="box has-background-link-light">
     <div class="field">
         <div class="field is-grouped">
             <p class="control is-expanded">
@@ -22,8 +25,11 @@
                 <a id="find-movie" class="button is-info">Search</a>
             </p>
         </div>
-        <ul id="movie-results">
-        </ul>
+        <div id="movie-results">
+        </div>
+        <div id="chosen-movie">
+        </div>
+        <br>
                 <label class="label">Movie Event Name</label>
                 <div class="control">
                     <input class="input" type="text" name="roomName" id="roomName">
@@ -45,9 +51,11 @@
                     <button id="partyCreate" class="button is-link partyCreate">Create Viewing Party</button>
                 </div>
   </div>
+  </div>
   <button class="modal-close is-large" aria-label="close"></button>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
 <script src="./assets/imdb.js" type="text/javascript"></script>
 
 

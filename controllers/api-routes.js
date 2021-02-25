@@ -52,4 +52,17 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/api/movies', function(req,res) {
+        db.Movie.create({
+            imdbId: req.body.imdbId
+        }).then(function(){
+            res.sendStatus(200);
+        });
+    });
+
+    app.get('/api/movies', function(req,res) {
+        db.Movie.findAll({}).then(function(data) {
+            res.json(data);
+        });
+    });
 }
